@@ -36,12 +36,13 @@ useEffect(()=>{
   return (
     <div>
       {posts.map( post => (
+        
         <Post
         key={post.id}
         id={post.id}
         username ={post.data().username}
         img ={post.data().image}
-        userImage = {post.data().userImage}
+        userImage = {post.data().profileImg}
         caption = {post.data().caption}
         /> 
        
