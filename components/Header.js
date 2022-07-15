@@ -6,8 +6,7 @@ import {SearchIcon,
   UserGroupIcon,
   HeartIcon,
   MenuIcon} from '@heroicons/react/outline'
-import {HomeIcon} from '@heroicons/react/solid'
-import Me from "../public/images/Me.png"
+import {HomeIcon,LoginIcon} from '@heroicons/react/solid'
 import {useSession,signIn,signOut} from "next-auth/react"
 import {useRouter} from "next/router"
 import { useRecoilState} from 'recoil'

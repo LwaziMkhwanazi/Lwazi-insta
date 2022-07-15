@@ -11,7 +11,7 @@ function signin({providers}) {
     <Header/>
     <div className=" flex flex-col items-center justify-center min-h-screen py-2  px-14 text-center">
       <img className='w-72' src="https://links.papareact.com/ocw" alt='intsagram image' />
-      <p className='font-sm italic text-xs'>
+      <p className='font-sm italic text-sm md:text-lg lg:text-2xl pb-6'>
         This is Not a Real App, Its Only For Lwazi Mkhwanazi's Portfolio purposes
       </p>
           <div className="mt-16">

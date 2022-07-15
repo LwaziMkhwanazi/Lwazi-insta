@@ -11,7 +11,7 @@ function Stories() {
      
     useEffect(()=> {
         const suggestion = [...Array(20)].map((_,i) =>({
-           username: faker.name.findName(),
+           name: faker.name.findName(),
            avatar: faker.image.avatar(),
             id:i,
            
@@ -26,7 +26,7 @@ function Stories() {
     <div className="flex space-x-2 p-6 bg-white border border-gray-200 rounded-sm mt-7 overflow-x-scroll scrollbar-thin scrollbar-thumb-black">
       {session && <Story img = {session?.user?.image} username = {session?.user?.username}/>}
       {users?.map( profile => (
-          <Story key={profile.id} img = {profile.avatar} username = {profile.username} />
+          <Story key={profile.id} img = {profile.avatar} username = {profile.name} />
       ))}
     </div>
   )
