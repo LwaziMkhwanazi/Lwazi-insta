@@ -55,11 +55,12 @@ function Header() {
 
             {/* Right */}
            <div className='flex items-center justify-end space-x-4'>
-              <HomeIcon className='navBtn' onClick={()=> router.push("/")} />
-              <MenuIcon className='h-6 md:hidden cursor-pointer'/>
+            
 
               {session? (
                 <>
+                  <HomeIcon className='navBtn' onClick={()=> router.push("/")} />
+                  <MenuIcon className='h-6 md:hidden cursor-pointer'/>
                   <div className="relative hidden md:block ">
                   <PaperAirplaneIcon className='navBtn rotate-45'/>
                   <div className="absolute text-sm -top-1 -right-2 bg-red-600 rounded-full
@@ -84,7 +85,10 @@ function Header() {
                   }
               </>    
               ):(
-                <button className='text-sm font-semibold border rounded-md py-1.5 px-3' onClick={signIn} >Sign In</button>
+                <button className='hidden text-xs font-thine md:font-semibold rounded-full border sm:rounded-md py-1.5 px-3' onClick={signIn} >
+                  Sign In
+                  <LoginIcon className='hidden'/>
+                  </button>
                 
               )}
             

@@ -24,7 +24,6 @@ function Posts() {
   // ]
 const [posts,setPosts] = useState([])
 
-console.log(posts)
 useEffect(()=>{
   const unsubcribe = onSnapshot(query(collection(db,'posts'),orderBy('timestamps','desc')), snapshot =>{
     setPosts(snapshot.docs)
