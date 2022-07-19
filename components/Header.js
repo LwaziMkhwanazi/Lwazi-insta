@@ -5,8 +5,8 @@ import {SearchIcon,
   PlusCircleIcon,
   UserGroupIcon,
   HeartIcon,
-  MenuIcon} from '@heroicons/react/outline'
-import {HomeIcon,LoginIcon} from '@heroicons/react/solid'
+  MenuIcon,LockOpenIcon} from '@heroicons/react/outline'
+import {HomeIcon,} from '@heroicons/react/solid'
 import {useSession,signIn,signOut} from "next-auth/react"
 import {useRouter} from "next/router"
 import { useRecoilState} from 'recoil'
@@ -16,7 +16,7 @@ function Header() {
   const {data: session} = useSession()
   const router = useRouter()
   const [open,setOpen] = useRecoilState(modalState)
-    console.log(open)
+ 
   return (
     <header className='shadow-sm bg-white border-b sticky top-0 z-50 p-0'>
        <div className='flex justify-between max-w-6xl mx-5 lg:mx-auto'>
@@ -29,7 +29,9 @@ function Header() {
                />
                
            </div>
-           <div className='sm:hidden relative w-10 flex-shrink-0 cursor-pointer'>
+           <div className='sm:hidden relative w-10 flex-shrink-0 cursor-pointer'
+             onClick={()=> router.push("/")}
+           >
                <Image src="https://links.papareact.com/jjm"
                 layout='fill'
                 objectFit='contain'
@@ -71,24 +73,27 @@ function Header() {
                   <PlusCircleIcon className='navBtn' onClick={()=> setOpen(true)} />
                   <UserGroupIcon className='navBtn'/>
                   <HeartIcon className='navBtn'/>
-    {/* 
-                  <Image 
+    
+                  <img
                     src={session.user.image}
-    
                      alt ="Profile pic"
-    
-                    className='h-10 rounded-full'
-    
+  
+                    className='h-10 rounded-full '
+                    onClick={signOut}
                     layout='fill'
-                  /> */
-                  <button className='text-sm font-semibold ' onClick={signOut} >Sign Out</button>
-                  }
+                  /> 
+                 
+                  
               </>    
               ):(
-                <button className='hidden text-xs font-thine md:font-semibold rounded-full border sm:rounded-md py-1.5 px-3' onClick={signIn} >
+                <div>
+                  <button className=' text-xs font-bold sm:inline md:font-semibold rounded-sm border sm:rounded-md py-1.5 px-3' onClick={signIn} >
                   Sign In
-                  <LoginIcon className='hidden'/>
+                  
                   </button>
+                  
+                  </div>
+                
                 
               )}
             

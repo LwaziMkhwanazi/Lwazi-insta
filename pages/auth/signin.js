@@ -17,7 +17,7 @@ function signin({providers}) {
           <div className="mt-16">
                 {Object?.values(providers).map((provider) =>(
                     <div key={provider.name}>
-                        <button className='py-2 px-3 bg-blue-500 rounded-md text-white text-xs' onClick={()=> SignIntoProviders(provider.id,{callbackUrl:"/"})}>
+                        <button className='py-2 px-3 bg-blue-500 rounded-sm text-white text-xs' onClick={()=> SignIntoProviders(provider.id,{callbackUrl:"/"})}>
                           Sign In With {provider.name}
                         </button>
                     </div>

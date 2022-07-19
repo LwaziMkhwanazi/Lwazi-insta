@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {BookmarkIcon,ChatIcon,DotsHorizontalIcon,EmojiHappyIcon, HeartIcon,PaperAirplaneIcon} from "@heroicons/react/outline"
+import {HeartIcon as HeartIconFilled} from "@heroicons/react/solid"
 import {useSession} from "next-auth/react"
-import { addDoc, collection, onSnapshot, orderBy, query, serverTimestamp } from '@firebase/firestore'
+import { addDoc, collection, onSnapshot,
+   orderBy, query, serverTimestamp,setDoc,doc,deleteDoc} from '@firebase/firestore'
 import { db } from '../firebase'
 import Moment from 'react-moment'
 
@@ -12,6 +14,7 @@ function Post({id,username,img,userImage,caption}) {
   const [comments,setComments] = useState([])
   const [likes,setLikes] = useState([])
   const {data:session} = useSession()
+  const [hasliked,setHasLiked] = useState(false)
 
   // Adding A Comment to The backend
    const sendComment = async(e)=>{
@@ -26,14 +29,7 @@ function Post({id,username,img,userImage,caption}) {
     })
    }
 
-   // Pulling Comments From The Database
-  //  useEffect(
-  //   ()=>
-  //   onSnapshot(
-  //     query(collection(db, "posts", id,"comments"),
-  //      orderBy("timestamp","desc")), 
-  //    (snapshot) => setComments(snapshot.docs)),[db])
-
+   
   useEffect(()=>{
      onSnapshot(query(collection(db,'posts',id,'comments'),orderBy('timestamps','desc')), snapshot =>{
       setComments(snapshot.docs)
@@ -47,9 +43,27 @@ function Post({id,username,img,userImage,caption}) {
   
   },[db,id])
 
-  console.log("comments", comments)
+  //Add Like to a Post
+  const addLike = async ()=>{
+    if(hasliked){
+      await deleteDoc(doc(db,'posts',id, 'likes', session.user.uid))
+    }else{
+      await setDoc(doc(db,'posts',id,'likes',session.user.uid), {
+        username: session.user.username,
+      })
+    }
+   
+
+  }
+
+  // UseEffect Monitering Likes
+  useEffect(()=>{
+    setHasLiked( likes.findIndex((like)=>like.id === session?.user?.uid) !== -1)
+  },[likes])
+
+
   return (
-    <div className='bg-white border rounded my-7 '> 
+    <div className='bg-white border rounded my-7 shadow-sm'> 
       {/* Header */}
         <div className="flex items-center p-5">
           <img 
@@ -70,7 +84,12 @@ function Post({id,username,img,userImage,caption}) {
           {session && (
              <div className='flex items-center justify-between p-4'>
              <div className='flex space-x-4'>
-               <HeartIcon className='btn'/>
+              {hasliked ? (
+                <HeartIconFilled className='btn text-red-500' onClick={addLike} />
+              ):(
+                <HeartIcon className='btn' onClick={addLike} />
+              )}
+              
                <ChatIcon className='btn'/>
                <PaperAirplaneIcon className='btn'/>
              </div>
@@ -84,6 +103,9 @@ function Post({id,username,img,userImage,caption}) {
       {/* caption  */}
          
               <p className='p-5 truncate'>
+                {likes.length > 0 && (
+                  <p className='font-bold mb-1'>{likes.length} likes</p>
+                )}
                 <span className=' font-bold mr-6'>{username}</span>
                   {caption}
               </p>
