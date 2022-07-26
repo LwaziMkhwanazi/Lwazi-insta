@@ -87,7 +87,7 @@ function Header() {
               </>    
               ):(
                 <div>
-                  <button className=' text-xs font-bold  border py-1.5 px-3' onClick={signIn} >
+                  <button className=' text-xs font-bold  border py-2 px-3 lg:px-5' onClick={signIn} >
                   SignIn
                   
                   </button>
