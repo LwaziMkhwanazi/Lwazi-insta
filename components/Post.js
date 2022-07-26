@@ -15,7 +15,7 @@ function Post({id,username,img,userImage,caption}) {
   const [likes,setLikes] = useState([])
   const {data:session} = useSession()
   const [hasliked,setHasLiked] = useState(false)
-
+ 
   // Adding A Comment to The backend
    const sendComment = async(e)=>{
     e.preventDefault()
@@ -70,6 +70,7 @@ function Post({id,username,img,userImage,caption}) {
             src={userImage}
               className = "rounded-full h-12 w-12 mr-3 border p-1 object-contain"
             alt = "user Image icon"
+           
           />
           <p className='flex-1 font-bold'>{username}</p>
           <DotsHorizontalIcon className='h-5'/>
@@ -77,7 +78,10 @@ function Post({id,username,img,userImage,caption}) {
 
 
       {/* img */}
-      <img src = {img} className =" w-full object-cover px-2" alt = "Post Image"/>
+      <div className="aspect-w-3 aspect-h-3 sm:aspect-w-1 sm:aspect-h-1 ">
+           <img src = {img} className =" w-full object-cover px-2 rounded-lg"   alt = "Post Image"/>
+      </div>
+    
 
 
       {/* buttons  */}
@@ -104,7 +108,7 @@ function Post({id,username,img,userImage,caption}) {
          
               <p className='p-5 truncate'>
                 {likes.length > 0 && (
-                  <p className='font-bold mb-1'>{likes.length} likes</p>
+                  <span className='font-bold mb-1'>{likes.length} likes</span>
                 )}
                 <span className=' font-bold mr-6'>{username}</span>
                   {caption}
@@ -115,7 +119,7 @@ function Post({id,username,img,userImage,caption}) {
       {comments.length > 0 && (
         <div className = "ml-10 h-20 overflow-y-scroll scrollbar-thumb-black scrollbar-thin">
           {comments.map( comment =>(
-            <div key={comment.key} className ='flex items-center space-x-2 mb-1' >
+            <div key={comment.id} className ='flex items-center space-x-2 mb-1' >
                 <img className='h-7 rounded-full' src={comment.data().userImage} alt=''/>
                 <p className='text-xs flex-1'>
                   <span className='font-bold pr-2 text-blue-600 text-sm'>{comment.data().username}</span>{" "}
