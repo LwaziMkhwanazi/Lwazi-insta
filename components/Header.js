@@ -19,7 +19,7 @@ function Header() {
  
   return (
     <header className='shadow-sm bg-white border-b sticky top-0 z-50 p-0'>
-       <div className='flex items-center justify-between max-w-6xl mx-5 lg:mx-auto'>
+       <div className='flex  justify-between max-w-6xl mx-5 lg:mx-auto'>
            {/* Left */}
           
            <div onClick={()=> router.push("/")} className='hidden sm:inline-grid relative w-24  cursor-pointer'>
