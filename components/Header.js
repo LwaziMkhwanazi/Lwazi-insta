@@ -5,14 +5,14 @@ import {SearchIcon,
   PlusCircleIcon,
   UserGroupIcon,
   HeartIcon,
-  MenuIcon,LockOpenIcon} from '@heroicons/react/outline'
+  MenuIcon} from '@heroicons/react/outline'
 import {HomeIcon,} from '@heroicons/react/solid'
 import {useSession,signIn,signOut} from "next-auth/react"
 import {useRouter} from "next/router"
 import { useRecoilState} from 'recoil'
-import { modalState } from '../recoilAtoms/ModalAtom'
+import  {modalState}  from '../recoilAtoms/ModalAtom'
 function Header() {
-
+         
   const {data: session} = useSession()
   const router = useRouter()
   const [open,setOpen] = useRecoilState(modalState)

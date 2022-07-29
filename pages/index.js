@@ -5,9 +5,7 @@ import Modal from '../components/Modal'
 
 export default function Home() {
 
-  const handleClick = () =>{
-
-  }
+  
   return (
     <div className="p-0 sm:px-2 bg-gray-50 h-screen overflow-y-scroll scrollbar-hide mx-auto">
       <Head>
